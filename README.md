@@ -16,11 +16,11 @@
 
 1. Clone the repo to your local machine
 2. Run `npm i`
-3. Create `.env` file, set up environment variables according to your Azure Database resource:
-   `MYSQL_HOST = HostIPAddress/Domain`
-   `MYSQL_USER = Username`
-   `MYSQL_PASSWORD = YourPassword`
-   `MYSQL_DATABASE = DatabaseName`
+3. Create `.env` file, set up environment variables according to your Azure Database resource:<br>
+   `MYSQL_HOST = HostIPAddress/Domain`<br>
+   `MYSQL_USER = Username`<br>
+   `MYSQL_PASSWORD = YourPassword`<br>
+   `MYSQL_DATABASE = DatabaseName`<br>
    `PORT = 4000`
 4. Get SSL Certificate `DigiCertGlobalRootCA.crt.pem` from Azure Database resource
 5. Start the server: `npm run dev`
