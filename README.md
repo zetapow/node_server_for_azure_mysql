@@ -4,8 +4,8 @@ Node.js server with MySQL Template
 
 ## Table of Contents
 
-- [Features](#features)
 - [Dependencies](#dependencies)
+- [Installation](#installation)
 - [API specification](#API_specification)
 
 ## Dependencies
