@@ -102,7 +102,7 @@ Request: `GET country/new%20zealand`
 
 ### Find the total population of a continent
 
-Create a new property for sale that will be displayed.
+Return a String with the number of the continent.
 
 **URL** : `/population/:continent`
 
