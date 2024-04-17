@@ -1,6 +1,4 @@
-# Project Name
-
-Node.js server with MySQL Template
+# Node.js server with MySQL Template
 
 ## Table of Contents
 
