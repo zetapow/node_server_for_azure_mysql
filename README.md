@@ -61,7 +61,7 @@ Follow these steps to set up the project on your local machine:
 ### Using `.env` and `.env.example` Files
 
 - **`.env` File:**
-  The `.env` file is used to store environment-specific configurations such as database credentials, API keys, and other sensitive information. It should never be committed to the version control system (e.g., Git) for security reasons. Make sure to add `.env` to your `.gitignore` file.
+  The `.env` file is used to store environment-specific configurations such as database credentials, API keys, and other sensitive information. It should **never** be committed to the version control system (e.g., Git) for security reasons. Make sure to add `.env` to your `.gitignore` file.
 
 - **`.env.example` File:**
   The `.env.example` file is a template version of the `.env` file. It should contain placeholders for all the environment variables used in the project but without actual sensitive values. This file can be safely committed to your repository and shared with your team to provide guidance on the required environment variables.

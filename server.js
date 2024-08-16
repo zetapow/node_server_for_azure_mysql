@@ -89,7 +89,7 @@ app.get("/population/:continent", (req, res) => {
   
   To receive the requests, your app should listen to that port using process.env.PORT. 
  */
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.NODE_APP_PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Server is live at http://localhost:${PORT}`);
