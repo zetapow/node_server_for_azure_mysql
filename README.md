@@ -1,42 +1,95 @@
-# Node.js server with MySQL Template
+# Node.js Server with MySQL Template
 
 ## Table of Contents
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-- [API specification](#API_specification)
+- [API Specification](#api-specification)
+- [Environment Configuration](#environment-configuration)
 
 ## Dependencies
 
-- dotenv
-- express
-- mysql2
+This project requires the following npm packages:
+
+- `dotenv` - For managing environment variables.
+- `express` - A web application framework for Node.js.
+- `mysql2` - MySQL client for Node.js, providing both callbacks and Promises API.
 
 ## Installation
 
-1. Clone the repo to your local machine
-2. Run `npm i`
-3. Create `.env` file, set up environment variables according to your Azure Database resource:<br>
-   `MYSQL_HOST = HostIPAddress/Domain`<br>
-   `MYSQL_USER = Username`<br>
-   `MYSQL_PASSWORD = YourPassword`<br>
-   `MYSQL_DATABASE = DatabaseName`<br>
-   `PORT = 4000`
-4. Get SSL Certificate `DigiCertGlobalRootCA.crt.pem` from Azure Database resource
-5. Start the server: `npm run dev`
+Follow these steps to set up the project on your local machine:
 
-## API specification<a name = "api-spec"></a>
+1. **Clone the Repository:**  
+   Run the following command to clone the repository to your local machine:  
+   ```bash
+   git clone <repository-url>
+   ```
 
-Your API should conform to the following specifications.
+2. **Install Dependencies:**  
+   Navigate to the project directory and install the required dependencies using npm:  
+   ```bash
+   npm install
+   ```
 
-### Show countries
+3. **Configure Environment Variables:**  
+   Create a `.env` file in the root directory of the project. Set up the following environment variables according to your Azure MySQL Database resource:
+   ```plaintext
+   MYSQL_HOST=HostIPAddress/Domain
+   MYSQL_USER=Username
+   MYSQL_PASSWORD=YourPassword
+   MYSQL_DATABASE=DatabaseName
+   PORT=4000
+   ```
+   - `MYSQL_HOST`: The IP address or domain name of your MySQL server.
+   - `MYSQL_USER`: The username for accessing the MySQL server.
+   - `MYSQL_PASSWORD`: The password for the above user.
+   - `MYSQL_DATABASE`: The name of the database you are connecting to.
+   - `PORT`: The port on which the Node.js server will listen.
 
-Get a list of all properties currently listed.
+4. **Obtain SSL Certificate:**  
+   Download the `DigiCertGlobalRootCA.crt.pem` SSL certificate from your Azure Database resource and place it in the project directory.
 
-**URL** : `/`
+5. **Start the Server:**  
+   Run the following command to start the server in development mode:  
+   ```bash
+   npm run dev
+   ```
+   The server should now be running and accessible at `http://localhost:4000`.
 
-**Method** : `GET`
+## Environment Configuration
 
+### Using `.env` and `.env.example` Files
+
+- **`.env` File:**
+  The `.env` file is used to store environment-specific configurations such as database credentials, API keys, and other sensitive information. It should never be committed to the version control system (e.g., Git) for security reasons. Make sure to add `.env` to your `.gitignore` file.
+
+- **`.env.example` File:**
+  The `.env.example` file is a template version of the `.env` file. It should contain placeholders for all the environment variables used in the project but without actual sensitive values. This file can be safely committed to your repository and shared with your team to provide guidance on the required environment variables.
+
+  **Example of `.env.example`:**
+  ```plaintext
+  MYSQL_HOST=your_host_here
+  MYSQL_USER=your_username_here
+  MYSQL_PASSWORD=your_password_here
+  MYSQL_DATABASE=your_database_name_here
+  PORT=4000
+  ```
+
+  Each developer can copy the `.env.example` file to create their own `.env` file and fill in the actual values specific to their environment.
+
+## API Specification
+
+Your API should conform to the following specifications:
+
+### 1. Show Countries
+
+Retrieve a list of all countries in the database.
+
+- **URL** : `/`
+- **Method** : `GET`
+- **Response Format** : JSON
+
+**Example Response:**
 ```json
 [
   {
@@ -56,62 +109,60 @@ Get a list of all properties currently listed.
     "Capital": 129,
     "Code2": "AW"
   },
-  {
-    ...
-  }
-  ,
   ...
 ]
 ```
 
----
+### 2. Show Information About a Specific Country
 
-### Show the information about a specific country
+Retrieve information about a single country based on its name.
 
-Get a single country.
+- **URL** : `/country/:countryname`
+- **Method** : `GET`
+- **Path Parameter** :
+  - `countryname`: The name of the country you want to retrieve information for.
 
-**URL** : `/country/:countryname`
+**Example Request:**
+```http
+GET /country/new%20zealand
+```
 
-**Method** : `GET`
-
-**Content example**
-
-Request: `GET country/new%20zealand`
-
+**Example Response:**
 ```json
 [{
-"Code": "NZL",
-"Name": "New Zealand",
-"Continent": "Oceania",
-"Region": "Australia and New Zealand",
-"SurfaceArea": 270534,
-"IndepYear": 1907,
-"Population": 3862000,
-"LifeExpectancy": 77.8,
-"GNP": 54669,
-"GNPOld": 64960,
-"LocalName": "New Zealand/Aotearoa",
-"GovernmentForm": "Constitutional Monarchy",
-"HeadOfState": "Elisabeth II",
-"Capital": 3499,
-"Code2": "NZ"
+  "Code": "NZL",
+  "Name": "New Zealand",
+  "Continent": "Oceania",
+  "Region": "Australia and New Zealand",
+  "SurfaceArea": 270534,
+  "IndepYear": 1907,
+  "Population": 3862000,
+  "LifeExpectancy": 77.8,
+  "GNP": 54669,
+  "GNPOld": 64960,
+  "LocalName": "New Zealand/Aotearoa",
+  "GovernmentForm": "Constitutional Monarchy",
+  "HeadOfState": "Elisabeth II",
+  "Capital": 3499,
+  "Code2": "NZ"
 }]
 ```
 
+### 3. Find the Total Population of a Continent
 
+Return the total population of a specified continent.
 
-### Find the total population of a continent
+- **URL** : `/population/:continent`
+- **Method** : `GET`
+- **Path Parameter** :
+  - `continent`: The name of the continent you want the population for.
 
-Return a String with the number of the continent.
+**Example Request:**
+```http
+GET /population/asia
+```
 
-**URL** : `/population/:continent`
-
-**Method** : `GET`
-
-**Content example**
-
-Request: `GET country/new%20zealand`
-
-```string
-`The total population of asia is 3705025700`
+**Example Response:**
+```plaintext
+The total population of Asia is 3,705,025,700
 ```
